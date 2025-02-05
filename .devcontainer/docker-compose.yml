@@ -18,7 +18,7 @@ services:
     build:
       context: ../backend/
       dockerfile: Dockerfile
-    command: bash -c "sleep 60 && python manage.py runserver 0.0.0.0:4000"
+    command: bash -c "sleep 60 && python manage.py migrate && python manage.py runserver 0.0.0.0:4000"
     volumes:
       - ../backend/:/app
     ports:

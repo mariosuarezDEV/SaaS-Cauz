@@ -1,5 +1,7 @@
 FROM python:3.12-bullseye
 
+ENV PYTHONBUFFERED 1
+
 WORKDIR /app
 
 RUN apt update && apt-get -y install default-libmysqlclient-dev build-essential pkg-config
