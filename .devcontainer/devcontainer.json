@@ -1,12 +1,12 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-  "name": "Prueba flask",
+  "name": "Prueba Django",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   //"image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye"
   "build": {
-    "dockerfile": "../alertas/Dockerfile",
-    "context": "../alertas"
+    "dockerfile": "../backend/Dockerfile",
+    "context": "../backend"
   }
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
