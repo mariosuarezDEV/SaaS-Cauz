@@ -1,0 +1,35 @@
+services:
+  # Servicio de base de datos MySQL:
+  database:
+    image: mysql:8.0.41-bookworm
+    environment:
+      MYSQL_ROOT_PASSWORD: edqnLMCSf31.
+      MYSQL_DATABASE: cauz
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: anypassword
+    ports:
+      - "4002:3306"
+    volumes:
+      - db-cauz:/var/lib/mysql
+    networks:
+      - net-cauz
+  # Servicio de backend: (django)
+  backend:
+    build:
+      context: ../backend/
+      dockerfile: Dockerfile
+    command: bash -c "sleep 60 && python manage.py runserver 0.0.0.0:4000"
+    volumes:
+      - ../backend/:/app
+    ports:
+      - "4000:4000"
+    networks:
+      - net-cauz
+    depends_on:
+      - database
+volumes:
+  db-cauz:
+networks:
+  # Red de tipo bridge
+  net-cauz:
+    driver: bridge
