@@ -9,7 +9,7 @@ class ModelIntegrantes(models.Model):
     dieta = models.CharField (max_length=100, blank=True, null=True, verbose_name="Especificacion de dieta", default="Sin especificación")
     
     def __str__(self):
-        return self.nombre + ' ' + self.apellidos
+        return f'{self.nombre} {self.apellidos}'
     
     class Meta:
         verbose_name = 'Integrante'
@@ -24,7 +24,8 @@ class ModelPresentaciones(models.Model):
     presentacion_grupo = models.CharField(max_length=200, null=False, blank=False,verbose_name="Semblanza del grupo")
     #fotografias =
     #video = 
-    integrantes = models.ForeignKey(ModelIntegrantes, on_delete=models.PROTECT, verbose_name="Integrantes", null=True, blank=True)
+    # Tiene muchos integrantes
+    integrantes = models.ManyToManyField(ModelIntegrantes, verbose_name="Integrantes",null=True, blank=True, related_name="integrantes")
     
     def __str__(self):
         return self.nombre_agrupacion
