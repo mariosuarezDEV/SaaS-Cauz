@@ -1,6 +1,6 @@
 FROM python:3.12-bullseye
 
-WORKDIR /app/alertas
+WORKDIR /flask_services
 
 # Install dependencies
 COPY requirements.txt .
@@ -10,5 +10,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run the application
-EXPOSE 8080
+EXPOSE 4001
 CMD ["python", "app.py"]
