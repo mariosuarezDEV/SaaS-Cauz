@@ -10,7 +10,7 @@
   //}
   "dockerComposeFile": "docker-compose.yml",
   "service": "backend",
-  "workspaceFolder": "/app"
+  "workspaceFolder": "/app",
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -18,7 +18,36 @@
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "pip3 install --user -r requirements.txt",
   // Configure tool-specific properties.
-  // "customizations": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "njpwerner.autodocstring",
+        "aaron-bond.better-comments",
+        "formulahendry.code-runner",
+        "batisteo.vscode-django",
+        "bigonesystems.django",
+        "bibhasdn.django-snippets",
+        "bibhasdn.django-html",
+        "shamanu4.django-intellisense",
+        "usernamehw.errorlens",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "eamodio.gitlens",
+        "kisstkondoros.vscode-gutter-preview",
+        "oderwat.indent-rainbow",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "VisualStudioExptTeam.intellicode-api-usage-examples",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode",
+        "ms-python.vscode-pylance",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "KevinRose.vsc-python-indent",
+        "mtxr.sqltools-driver-mysql",
+        "mtxr.sqltools"
+      ]
+    }
+  }
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 }
