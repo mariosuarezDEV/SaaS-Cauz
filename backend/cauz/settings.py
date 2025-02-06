@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'postulantes.apps.PostulantesConfig',
     'rest_framework.authtoken',
     'solicitud_eventos.apps.SolicitudEventosConfig',
+    'presentaciones.apps.PresentacionesConfig',
 ]
 
 MIDDLEWARE = [
