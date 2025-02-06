@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('postulantes/api/', include('postulantes.urls')),
+    path('solicitud_eventos/api/', include('solicitud_eventos.urls')),
     path('api-token-auth/', views.obtain_auth_token)
 ]

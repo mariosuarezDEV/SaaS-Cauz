@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'postulantes.apps.PostulantesConfig',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'solicitud_eventos.apps.SolicitudEventosConfig',
 ]
 
 MIDDLEWARE = [
