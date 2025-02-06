@@ -1,0 +1,34 @@
+[
+    personas: {
+        {
+        nombre: "Luis Mario",
+        apellido: "Cervantes"
+        edad: 21
+    }
+    {
+        nombre: "Luis Mario",
+        apellido: "Cervantes"
+        edad: 21
+    }
+    {
+        nombre: "Luis Mario",
+        apellido: "Cervantes"
+        edad: 21
+    }{
+        nombre: "Luis Mario",
+        apellido: "Cervantes"
+        edad: 21
+    }
+    
+    } 
+]
+
+http://localhost:4000/personas [GET- POST- PUT - DELETE]
+
+http://localhost:4000/personas/2 [GET - PUT - DELETE]
+
+{
+    NOmbre: "Luis Mario",
+    Apellido: "Cervantes",
+    Edad: 21
+}
