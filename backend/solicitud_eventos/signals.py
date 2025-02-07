@@ -67,7 +67,7 @@ Con mucho entusiasmo,
 def enviar_correo_actualizacion (postulante, instancia):
     asunto=  "¡Actualización Exitosa del Evento! 🎉"
     mensaje= f"""
-    **Estimado/a {postulante.nombre} {postulante.apellido_paterno} {postulante.apellido_materno}**,
+    **Estimado/a {postulante.nombre} {postulante.apellido_paterno} {postulante.apellido_materno}** ,
     
     
 Les informamos que los cambios en el evento [nombre del evento] se han realizado exitosamente.
@@ -75,13 +75,13 @@ Les informamos que los cambios en el evento [nombre del evento] se han realizado
 Detalles actualizados:
 
 
-🔹 📌 **Nombre del evento: ** {instancia.nombre_evento}
+🔹 📌 **Nombre del evento**: {instancia.nombre_evento}
 
 
-🔹 📅 **Fecha tentativa: ** {instancia.fecha_tentativa}
+🔹 📅 **Fecha tentativa**: {instancia.fecha_tentativa}
 
 
-🔹 🎶 **Género: ** {instancia.genero}
+🔹 🎶 **Género**: {instancia.genero}
 
 
 🔹 👥 **Integrantes: ** {instancia.integrantes}
