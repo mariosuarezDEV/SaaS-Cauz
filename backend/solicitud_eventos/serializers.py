@@ -17,6 +17,7 @@ class SerializerSolicitudEventos(serializers.ModelSerializer):
             'postulante',
         ]
         read_only_fields = ['id', 'fecha_solicitud', 'fecha_actualizacion']
+    
     # Validar que material sea una URL
     def validate_meterial(self, value):
         if 'http' not in value:

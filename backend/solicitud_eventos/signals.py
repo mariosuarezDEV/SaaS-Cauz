@@ -6,14 +6,15 @@ from postulantes.models import ModelPostulante # Importar el modelo Postulante (
 
 # Correo de recibido (servicio creado en flask)
 import requests # Requests para hacer peticiones HTTP
+
+servidor = 'flask'
+puerto = 4001
+endpoint = f'http://{servidor}:{puerto}/send_email'
+
 def use_send_email_service_for_new_query(email, detalles):
     """
     Enviar un correo de recibido al usuario que ha hecho una solicitud de evento
     """
-    servidor = 'flask'
-    puerto = 4001
-    endpoint = f'http://{servidor}:{puerto}/send_email'
-    
     # Elementos que necesita el endpoint
     asunto = "¡Te damos la bienvenida a Foro Cauz!" # Asunto del correo
     mensaje = f"""
@@ -61,8 +62,57 @@ Con mucho entusiasmo,
         })
         print(response.json())
     except Exception as e:
-        print('No se puede imprimir el correo')
+        print('No se puede imprimir el correo')   
+        
+def enviar_correo_actualizacion (postulante, instancia):
+    asunto=  "¡Actualización Exitosa del Evento! 🎉"
+    mensaje= f"""
+    **Estimado/a {postulante.nombre} {postulante.apellido_paterno} {postulante.apellido_materno}**,
     
+    
+Les informamos que los cambios en el evento [nombre del evento] se han realizado exitosamente.
+
+Detalles actualizados:
+
+
+🔹 📌 **Nombre del evento: ** {instancia.nombre_evento}
+
+
+🔹 📅 **Fecha tentativa: ** {instancia.fecha_tentativa}
+
+
+🔹 🎶 **Género: ** {instancia.genero}
+
+
+🔹 👥 **Integrantes: ** {instancia.integrantes}
+
+
+🔹 📂 **Material: ** {instancia.meterial}
+
+
+Por favor, no duden en contactarnos si tienen algun otro cambio.
+
+
+¡Gracias por su atención y esperamos contar con su participación!
+
+
+Saludos cordiales,
+
+
+**Foro CAUZ**
+    """
+    try:
+        print(f'Enviando correo a {postulante.correo}')
+        # Hacer la petición
+        response = requests.post(endpoint, json={
+            'email': postulante.correo,
+            'asunto': asunto,
+            'mensaje': mensaje,
+        })
+        print(response.json())
+    except Exception as e:
+        print('No se puede imprimir el correo')  
+
 @receiver(post_save, sender=ModelSolicitudEventos) # Recibir señales después de guardar
 def nueva_solicitud(sender, instance, created, **kwargs): # Definir la función que manejará las señales
     if created: # Si se ha creado
@@ -73,4 +123,6 @@ def nueva_solicitud(sender, instance, created, **kwargs): # Definir la función 
         # Informacion de la solicitud
         use_send_email_service_for_new_query(postulante.correo, instance) # Enviar un correo de recibido al postulante
     else: # Si no
-        print('Se ha modificado una solicitud de evento') # Imprimir en consola
+        postulante = ModelPostulante.objects.get(id=instance.postulante.id)
+        enviar_correo_actualizacion(postulante, instance)
+        #print('Se ha modificado una solicitud de evento') # Imprimir en consola
