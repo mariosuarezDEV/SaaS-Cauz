@@ -15,7 +15,7 @@ def use_send_email_service_for_new_query(email, detalles):
     endpoint = f'http://{servidor}:{puerto}/send_email'
     
     # Elementos que necesita el endpoint
-    asunto = "Te damos la bienvenida a Foro Cauz!" # Asunto del correo
+    asunto = "¡Te damos la bienvenida a Foro Cauz!" # Asunto del correo
     mensaje = f"""
 # 🎉 ¡Nos emociona saber que quieres ser parte de Foro Cauz! 🎉
 
