@@ -4,6 +4,8 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+import markdown
+
 
 app = Flask(__name__)
 
@@ -25,13 +27,16 @@ def send_email():
     email = data['email']
     asunto = data['asunto']
     mensaje_api = data['mensaje']
-    # Validar que los datos esten completos
+    
+    # Validar que los datos estén completos
     if not email or not asunto or not mensaje_api:
         return jsonify({
             'message': 'Datos incompletos'
         }), 400
         
-    # Enviar correo electronico
+    # Convertir el mensaje de Markdown a HTML
+    mensaje_html = markdown.markdown(mensaje_api)
+    
     # Datos del correo
     remitente = "lmcervantessuarez@gmail.com"
     destinatario = email
@@ -43,9 +48,8 @@ def send_email():
     mensaje['To'] = destinatario
     mensaje['Subject'] = asunto
 
-    # Cuerpo del mensaje
-    cuerpo = mensaje_api
-    mensaje.attach(MIMEText(cuerpo, 'plain'))
+    # Cuerpo del mensaje (ahora en HTML)
+    mensaje.attach(MIMEText(mensaje_html, 'html'))  # Enviar como 'html' en lugar de 'plain'
 
     # Establecer la conexión con el servidor SMTP de Gmail
     try:
