@@ -19,7 +19,7 @@ services:
       context: ../backend/
       dockerfile: Dockerfile
     command: bash -c "sleep 60 && python manage.py migrate && python manage.py runserver 0.0.0.0:4000"
-    volumes:
+    volumes: # Hacer refencia a la carpeta backend (Donde ese esta programando el proyecto)
       - ../backend/:/app
     ports:
       - "4000:4000"
@@ -27,6 +27,17 @@ services:
       - net-cauz
     depends_on:
       - database
+  # Servicio de Flask:
+  flask:
+    build:
+      context: ../alertas/
+      dockerfile: Dockerfile
+    volumes: # Hacer refencia a la carpeta flask (Donde ese esta programando el proyecto)
+      - ../alertas/:/flask_services
+    ports:
+      - "4001:4001"
+    networks:
+      - net-cauz
 volumes:
   db-cauz:
 networks:
