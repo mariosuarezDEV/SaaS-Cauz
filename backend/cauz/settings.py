@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'postulantes.apps.PostulantesConfig',
     'rest_framework.authtoken',
     'solicitud_eventos.apps.SolicitudEventosConfig',
+    'presentaciones.apps.PresentacionesConfig',
     'drf_spectacular',
 ]
 
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'cauz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'cauz',
@@ -87,6 +88,15 @@ DATABASES = {
 		'HOST':'database',
 		'PORT':'3306',
 	}
+}
+
+"""
+# Conexion a una base de datos SQLite
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    }
 }
 
 
