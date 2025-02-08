@@ -142,15 +142,11 @@ def save_previous_instance(sender, instance, **kwargs):
 @receiver(post_save, sender=ModelSolicitudEventos) # Recibir señales después de guardar
 def nueva_solicitud(sender, instance, created, **kwargs): # Definir la función que manejará las señales
     if created: # Si se ha creado
-        #postulante = ModelPostulante.objects.get(id=instance.postulante) # Obtener el postulante que ha hecho la solicitud
-        #use_send_email_service_for_new_query(postulante.correo) # Enviar un correo de recibido al postulante
-        #print(f"Nuevo objeto de {sender} ha sido guardado: {instance.postulante.id}") # Imprimir en consola
         postulante = ModelPostulante.objects.get(id=instance.postulante.id) # Obtener el postulante que ha hecho la solicitud
         # Informacion de la solicitud
         use_send_email_service_for_new_query(postulante.correo, instance) # Enviar un correo de recibido al postulante
     else: # Si no
         postulante = ModelPostulante.objects.get(id=instance.postulante.id)
-        
         # Verificamos si la instancia anterior está almacenada
         previous_instance = previous_instances.get(instance.id)
 
