@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save # Enviar señales después de guardar
+from django.db.models.signals import post_save, pre_save # Enviar señales después de guardar
 from django.dispatch import receiver # Recibir señales
 
 from .models import ModelSolicitudEventos # Importar el modelo SolicitudEvento
@@ -65,41 +65,38 @@ Con mucho entusiasmo,
         print('No se puede imprimir el correo')   
         
 def enviar_correo_actualizacion (postulante, instancia):
-    asunto=  "¡Actualización Exitosa del Evento! 🎉"
+    asunto=  f'¡Buenas noticias {postulante.nombre}! 🎉'
     mensaje= f"""
-    **Estimado/a {postulante.nombre} {postulante.apellido_paterno} {postulante.apellido_materno}** ,
-    
-    
-Les informamos que los cambios en el evento [nombre del evento] se han realizado exitosamente.
+¡Buenas noticias! 🎉 Los cambios solicitados para el evento **{instancia.nombre_evento}** han sido procesados y actualizados con éxito.
 
-Detalles actualizados:
+Aquí te dejamos los detalles más recientes: 
 
+---
 
-🔹 📌 **Nombre del evento**: {instancia.nombre_evento}
+🔹 **📌 Nombre del Evento:**  
+*{instancia.nombre_evento}*
 
+🔹 **📅 Fecha Tentativa:**  
+*{instancia.fecha_tentativa}*
 
-🔹 📅 **Fecha tentativa**: {instancia.fecha_tentativa}
+🔹 **🎶 Género Musical:**  
+*{instancia.genero}*
 
+🔹 **👥 Integrantes:**  
+*{instancia.integrantes}*
 
-🔹 🎶 **Género**: {instancia.genero}
+🔹 **📂 Material Requerido:**  
+*{instancia.meterial}*
 
+---
 
-🔹 👥 **Integrantes: ** {instancia.integrantes}
+Si necesitas hacer más ajustes o tienes alguna consulta, ¡no dudes en ponerte en contacto con nosotros! Estamos aquí para ayudarte. 🤝
 
+Gracias por ser parte de **Foro CAUZ**, y ¡esperamos contar con tu participación! 🚀
 
-🔹 📂 **Material: ** {instancia.meterial}
+Saludos cordiales,  
+**El equipo de Foro CAUZ**  
 
-
-Por favor, no duden en contactarnos si tienen algun otro cambio.
-
-
-¡Gracias por su atención y esperamos contar con su participación!
-
-
-Saludos cordiales,
-
-
-**Foro CAUZ**
     """
     try:
         print(f'Enviando correo a {postulante.correo}')
@@ -112,6 +109,35 @@ Saludos cordiales,
         print(response.json())
     except Exception as e:
         print('No se puede imprimir el correo')  
+        
+
+def change_status(postulante, instancia):
+    asunto=  f'¡La solicitud de tu evento ha sido actualizada! 🎉'
+    mensaje= f'El estado de la solicitud de tu evento **{instancia.nombre_evento}** ha sido actualizado a **{instancia.estado}**.'
+    try:
+        print(f'Enviando correo a {postulante.correo}')
+        # Hacer la petición
+        response = requests.post(endpoint, json={
+            'email': postulante.correo,
+            'asunto': asunto,
+            'mensaje': mensaje,
+        })
+        print(response.json())
+    except Exception as e:
+        print('No se puede imprimir el correo')
+
+# Creamos un diccionario para almacenar las instancias anteriores
+previous_instances = {}
+
+@receiver(pre_save, sender=ModelSolicitudEventos)
+def save_previous_instance(sender, instance, **kwargs):
+    # Guardamos la instancia anterior antes de que se guarde la nueva
+    try:
+        previous_instance = sender.objects.get(id=instance.id)
+        previous_instances[instance.id] = previous_instance
+    except sender.DoesNotExist:
+        # Si la instancia no existe, es porque es nueva, por lo que no hace falta guardar la versión anterior
+        pass
 
 @receiver(post_save, sender=ModelSolicitudEventos) # Recibir señales después de guardar
 def nueva_solicitud(sender, instance, created, **kwargs): # Definir la función que manejará las señales
@@ -124,5 +150,16 @@ def nueva_solicitud(sender, instance, created, **kwargs): # Definir la función 
         use_send_email_service_for_new_query(postulante.correo, instance) # Enviar un correo de recibido al postulante
     else: # Si no
         postulante = ModelPostulante.objects.get(id=instance.postulante.id)
-        enviar_correo_actualizacion(postulante, instance)
-        #print('Se ha modificado una solicitud de evento') # Imprimir en consola
+        
+        # Verificamos si la instancia anterior está almacenada
+        previous_instance = previous_instances.get(instance.id)
+
+        if previous_instance:  # Si existe la instancia anterior
+            if previous_instance.estado != instance.estado:  # Si el estado ha cambiado
+                change_status(postulante, instance)  # Ejecutar la función para cambio de estado
+            else:
+                enviar_correo_actualizacion(postulante, instance)  # Si no, es otra actualización
+        else:
+            # En caso de que no haya instancia anterior (por ejemplo, si es la primera vez que se guarda)
+            enviar_correo_actualizacion(postulante, instance)
+        

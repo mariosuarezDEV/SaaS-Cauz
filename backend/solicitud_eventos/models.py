@@ -15,6 +15,7 @@ class ModelSolicitudEventos(models.Model):
     meterial = models.CharField(max_length=500, verbose_name='Material', null=False, blank=False)
     # Relaciones
     postulante = models.ForeignKey(ModelPostulante, on_delete=models.PROTECT, verbose_name='Postulante', null=False, blank=False)
+    estado = models.BooleanField(default=False, verbose_name='Aceptado')
     
     def __str__(self):
         return self.nombre_evento + ' - ' + self.postulante.nombre + ' ' + self.postulante.apellido_paterno + ' ' + self.postulante.apellido_materno
