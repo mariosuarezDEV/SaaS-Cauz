@@ -17,10 +17,10 @@ services:
   # Servicio de Flask:
   flask:
     build:
-      context: ../alertas/
+      context: ../flask/
       dockerfile: Dockerfile
     volumes: # Hacer refencia a la carpeta flask (Donde ese esta programando el proyecto)
-      - ../alertas/:/flask_services
+      - ../flask/:/app
     ports:
       - "4001:4001"
     networks:
@@ -29,11 +29,11 @@ services:
   # Servicio de backend: (django)
   backend:
     build:
-      context: ../backend/
+      context: ../django/
       dockerfile: Dockerfile
     command: bash -c "sleep 60 && python manage.py migrate && python manage.py runserver 0.0.0.0:4000"
     volumes: # Hacer refencia a la carpeta backend (Donde ese esta programando el proyecto)
-      - ../backend/:/app
+      - ../django/:/app
     ports:
       - "4000:4000"
     networks:
@@ -42,8 +42,27 @@ services:
       - database
       - flask
     restart: always
+  astro:
+    build:
+      context: ../astro/
+      dockerfile: Dockerfile
+    volumes:
+      - ../astro/:/app
+      - node_modules:/app/node_modules
+    networks:
+      - net-cauz
+    ports:
+      - "4003:4003"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+    depends_on:
+      - backend
+      - flask
+    restart: always
 volumes:
   db-cauz:
+  node_modules:
 networks:
   # Red de tipo bridge
   net-cauz:
