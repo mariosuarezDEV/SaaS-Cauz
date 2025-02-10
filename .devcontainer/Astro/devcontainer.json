@@ -1,0 +1,40 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+	"name": "Astro",
+	//"build": {
+	//	"dockerfile": "../../astro/Dockerfile",
+	//	"context": "../../astro"
+	//},
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "astro",
+	"workspaceFolder": "/app",
+	"forwardPorts": [4003],
+	"customizations": {
+	  "vscode": {
+		"extensions": [
+			"astro-build.astro-vscode",
+			"aaron-bond.better-comments",
+			"formulahendry.code-runner",
+			"usernamehw.errorlens",
+			"miguelsolorio.fluent-icons",
+			"GitHub.copilot",
+			"GitHub.copilot-chat",
+			"kisstkondoros.vscode-gutter-preview",
+			"VisualStudioExptTeam.vscodeintellicode",
+			"VisualStudioExptTeam.intellicode-api-usage-examples",
+			"ms-vscode.vscode-typescript-next",
+			"yzhang.markdown-all-in-one",
+			"christian-kohler.npm-intellisense",
+			"christian-kohler.path-intellisense",
+			"esbenp.prettier-vscode",
+			"miguelsolorio.symbols",
+			"bradlc.vscode-tailwindcss",
+			"dbaeumer.vscode-eslint",
+			"xabikos.JavaScriptSnippets",
+			"ecmel.vscode-html-css",
+			"formulahendry.auto-rename-tag",
+			"formulahendry.auto-close-tag"
+		]
+	  }
+	}
+}
