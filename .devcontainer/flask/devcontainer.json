@@ -10,7 +10,7 @@
   //}
   "dockerComposeFile": "../docker-compose.yml",
   "service": "flask",
-  "workspaceFolder": "/flask_services",
+  "workspaceFolder": "/app",
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
   // Use 'forwardPorts' to make a list of ports inside the container available locally.

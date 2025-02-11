@@ -1,0 +1,51 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "Vue JS | Cauz Clientes",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	//"image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye"
+	//"build": {
+	//  "dockerfile": "../backend/Dockerfile",
+	//  "context": "../backend"
+	//}
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "clientes_cauz",
+	"workspaceFolder": "/app",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "pip3 install --user -r requirements.txt",
+	// Configure tool-specific properties.
+	"customizations": {
+	  "vscode": {
+		"extensions": [
+			"Vue.volar",
+			"hollowtree.vue-snippets",
+			"bradlc.vscode-tailwindcss",
+			"GitHub.copilot-chat",
+			"GitHub.copilot",
+			"VisualStudioExptTeam.intellicode-api-usage-examples",
+			"formulahendry.auto-close-tag",
+			"formulahendry.auto-rename-tag",
+			"aaron-bond.better-comments",
+			"formulahendry.code-runner",
+			"usernamehw.errorlens",
+			"dbaeumer.vscode-eslint",
+			"kisstkondoros.vscode-gutter-preview",
+			"VisualStudioExptTeam.vscodeintellicode",
+			"xabikos.JavaScriptSnippets",
+			"ms-vscode.vscode-typescript-next",
+			"christian-kohler.npm-intellisense",
+			"christian-kohler.path-intellisense",
+			"esbenp.prettier-vscode",
+			"EditorConfig.EditorConfig",
+			"emranweb.daisyui-snippet"
+		]
+	  }
+	}
+	//"runServices": ["database", "backend", "flask"]
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+  }
