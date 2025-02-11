@@ -31,7 +31,7 @@ services:
     build:
       context: ../django/
       dockerfile: Dockerfile
-    command: bash -c "sleep 60 && python manage.py migrate && python manage.py runserver 0.0.0.0:4000"
+    command: bash -c "sleep 60 && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:4000"
     volumes: # Hacer refencia a la carpeta backend (Donde ese esta programando el proyecto)
       - ../django/:/app
     ports:

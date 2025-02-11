@@ -25,6 +25,7 @@ urlpatterns = [
     path('postulantes/api/', include('postulantes.urls')),
     path('solicitud_eventos/api/', include('solicitud_eventos.urls')),
     path('presentaciones/api/', include('presentaciones.urls')),
+    path('genero_presentacion/api/',include('genero_presentacion.urls')),
     path('api-token-auth/', views.obtain_auth_token),
     # Documentacion
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

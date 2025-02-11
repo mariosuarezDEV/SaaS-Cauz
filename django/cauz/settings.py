@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'solicitud_eventos.apps.SolicitudEventosConfig',
     'presentaciones.apps.PresentacionesConfig',
+    'genero_presentacion.apps.GeneroPresentacionConfig',
     'drf_spectacular',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -157,3 +160,5 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+CORS_ALLOW_ALL_ORIGINS = True  # Solo para desarrollo, no recomendado en producción
