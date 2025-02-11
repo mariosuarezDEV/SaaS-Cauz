@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 </script>
 <template>
-  <div class="navbar bg-base-100 shadow-lg">
+  <div class="navbar bg-neutral text-white shadow-lg">
     <div className="navbar-start">
       <div className="dropdown">
         <div tabIndex="{0}" role="button" className="btn btn-ghost btn-circle">

@@ -1,8 +1,11 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import axios from 'axios'
 
+const API = import.meta.env.VITE_API_URL
+const messageAPI = ref('')
+const showAlert = ref(false)
 const postulante = reactive({
   nombre: '',
   apellido_paterno: '',
@@ -13,15 +16,25 @@ const postulante = reactive({
 
 const enviarSolicitud = async () => {
   try {
-    const response = await axios.post(
-      'http://192.168.1.228:4000/postulantes/api/postulantes/',
-      postulante,
-    )
+    const response = await axios.post(`${API}/solicitud_eventos/api/solicitud/`, postulante)
+    // Limpiar los campos
+    postulante.nombre = ''
+    postulante.apellido_paterno = ''
+    postulante.apellido_materno = ''
+    postulante.correo = ''
+    postulante.telefono = ''
     console.log(response)
   } catch (error) {
-    console.error(error)
+    console.log(error)
+    messageAPI.value = 'Ocurrio un error al enviar la solicitud'
+    showAlert.value = true
+    console.log(messageAPI.value)
   }
 }
+
+const genero_eventos = ref([])
+
+// Obtener genero de eventos
 </script>
 
 <template>
@@ -43,14 +56,14 @@ const enviarSolicitud = async () => {
         <div class="grid grid-cols-2 justify-items-center gap-3">
           <label class="input input-bordered gap-2 col-span-2 w-full">
             Nombre(s)<span class="text-red-700">*</span>:
-            <input type="text" class="grow" placeholder="Daisy" v-model="postulante.nombre" />
+            <input type="text" class="grow" placeholder="Jon Doe" v-model="postulante.nombre" />
           </label>
           <label class="input input-bordered gap-2 col-span-1 w-full">
-            Apellidos Paterno:
+            Apellidos Paterno<span class="text-red-700">*</span>:
             <input
               type="text"
               class="grow"
-              placeholder="Daisy"
+              placeholder="Tu apellido paterno"
               v-model="postulante.apellido_paterno"
             />
           </label>
@@ -59,27 +72,30 @@ const enviarSolicitud = async () => {
             <input
               type="text"
               class="grow"
-              placeholder="Daisy"
+              placeholder="Tu apellido materno"
               v-model="postulante.apellido_materno"
             />
           </label>
           <label class="input input-bordered gap-2 col-span-1 w-full">
             Correo<span class="text-red-700">*</span>:
-            <input type="email" class="grow" placeholder="Daisy" v-model="postulante.correo" />
+            <input
+              type="email"
+              class="grow"
+              placeholder="Correo Electronico"
+              v-model="postulante.correo"
+            />
           </label>
           <label class="input input-bordered gap-2 col-span-1 w-full">
             Número de teléfono<span class="text-red-700">*</span>:
-            <input type="text" class="grow" placeholder="Daisy" v-model="postulante.telefono" />
+            <input type="text" class="grow" placeholder="Teléfono" v-model="postulante.telefono" />
           </label>
         </div>
-        <p>
-          {{ postulante.nombre }} {{ postulante.apellido_paterno }}
-          {{ postulante.apellido_materno }} {{ postulante.correo_electronico }}
-          {{ postulante.telefono }}
-        </p>
         <!-- Informacion de solicitud -->
-        <h2 class="card-title text-2xl mb-2 mt-6">¿Qué tipo de presentación te gustaría hacer?</h2>
-        <button class="btn btn-primary">Enviar datos</button>
+        <h2 class="card-title text-2xl mb-2 mt-2">¿Qué tipo de presentación te gustaría hacer?</h2>
+        <button class="btn btn-neutral">Enviar datos</button>
+        <div role="alert" class="alert alert-success mt-6 mb-6">
+          <span class="text-white text-normal">¡Tus datos se subieron con exito!</span>
+        </div>
       </form>
     </div>
   </div>
