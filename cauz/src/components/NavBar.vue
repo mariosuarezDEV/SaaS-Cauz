@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 </script>
 <template>
-  <div class="navbar bg-base-100 shadow-lg">
+  <div class="navbar bg-neutral text-white shadow-lg">
     <div className="navbar-start">
       <div className="dropdown">
         <div tabIndex="{0}" role="button" className="btn btn-ghost btn-circle">
@@ -25,7 +25,7 @@ import { RouterLink } from 'vue-router'
           tabIndex="{0}"
           class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
         >
-          <li><button class="btn btn-outline m-2 text-base">Inicio</button></li>
+          <li><RouterLink to="/" class="btn btn-outline m-2 text-base">Inicio</RouterLink></li>
           <li><button class="btn btn-outline m-2 text-base">Eventos</button></li>
           <!-- Usar router link -->
           <li>
