@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class ModelGeneroEventos(models.Model):
-    nombre = models.CharField(max_length=25, null= False, blank= False, verbose_name="Nombre del evento")
+    nombre = models.CharField(max_length=25, null= False, blank= False, verbose_name="Genero del evento")
     descricion = models.CharField(max_length=50, null= True, blank= True, verbose_name="Breve descripción del evento")
     fecha_creacion = models.DateField(auto_now_add= True, verbose_name="Fecha de creacion del evento")
     fecha_modificacion = models.DateField(auto_now_add= True, verbose_name="Fecha de modificacion del evento")
