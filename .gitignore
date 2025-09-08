@@ -1,0 +1,95 @@
+# =========================
+# Python / Django
+# =========================
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Entornos virtuales
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Archivos de configuración de entorno
+*.env
+*.env.*
+
+# Archivos de logs y base de datos local
+*.log
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos de migración compilados
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/__pycache__/
+
+# Archivos de cache de Django
+*.mo
+*.pot
+
+# Archivos estáticos generados
+staticfiles/
+media/
+
+# Archivos de cobertura y pruebas
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# =========================
+# Node / Vue.js
+# =========================
+
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Archivos de build
+dist/
+build/
+*.local
+
+# Archivos de caché
+.cache/
+.vuepress/dist
+.temp
+*.tmp
+
+# Archivos de lock opcionales
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Archivos de configuración locales
+*.local.js
+*.local.json
+*.local.yaml
+
+# =========================
+# IDEs / Editores
+# =========================
+
+# VSCode
+.vscode/
+.history/
+
+# PyCharm
+.idea/
+
+# Otros
+.DS_Store
+Thumbs.db
